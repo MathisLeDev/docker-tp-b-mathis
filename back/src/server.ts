@@ -19,19 +19,6 @@ appDataSource
 const app = express();
 app.use(morgan("dev"));
 
-
-app.use("/media", express.static("public/images"));
-
-// Votre route pour accéder aux images
-app.get("/api/media/:imageName", (req, res) => {
-  const { imageName } = req.params;
-  res.sendFile(`${__dirname}/public/images/${imageName}`);
-});
-
-app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
-});
-
 const port = 3001;
 app.use(
   cors({
@@ -39,16 +26,6 @@ app.use(
   }),
 );
 app.use(JwtMiddleware);
-
-
-app.use("/media", express.static("public/images"));
-
-// Votre route pour servir l'image
-app.get("/api/media/:imageName", (req, res) => {
-  const { imageName } = req.params;
-  res.sendFile(`${__dirname}/public/images/${imageName}`);
-});
-
 app.use(express.json()); // Add this line to handle JSON requests
 app.use(express.urlencoded({ extended: true }));
 

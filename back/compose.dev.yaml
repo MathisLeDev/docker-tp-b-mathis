@@ -1,0 +1,15 @@
+services:
+  tp-db:
+    image: "postgres:17.1-alpine"
+    volumes:
+      - tp-db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_HOST: ${DB_HOST}
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+
+volumes:
+  tp-db-data:

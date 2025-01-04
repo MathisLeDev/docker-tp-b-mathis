@@ -1,0 +1,32 @@
+services:
+  tp-back:
+    build: .
+    env_file:
+      - .env.prod
+    ports:
+      - "3001:3001"
+    depends_on:
+      - tp-db
+    networks:
+      - tp-shared-network
+      - tp-db-network
+
+  tp-db:
+    image: "postgres:17.1-alpine"
+    volumes:
+      - tp-db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_HOST: ${DB_HOST}
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    networks:
+      - tp-db-network
+
+volumes:
+  tp-db-data:
+
+networks:
+  tp-shared-network:
+    external: true
+  tp-db-network:

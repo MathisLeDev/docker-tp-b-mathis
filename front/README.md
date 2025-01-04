@@ -1,79 +1,103 @@
-# Getting Started with Create React App
+# Docker TP Front (Quotopia)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table des matières
 
-## Available Scripts
+1. [Scripts de développement](#scripts-de-d%C3%A9veloppement)
+    - [Démarrer l’application](#démarrer-l’application)
+    - [Lancer les tests](#lancer-les-tests)
+    - [Construire l’application](#construire-l’application)
+2. [Technologies et outils](#technologies-et-outils)
+    - [Axios](#axios)
+    - [Tailwind CSS](#tailwind-css)
+    - [React Router (v6.4)](#react-router-v64)
+    - [RxJS](#rxjs)
+3. [Références](#r%C3%A9f%C3%A9rences)
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Scripts de développement
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Démarrer l’application
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```bash
+yarn start
+```
 
-### `npm test`
+- Démarre l'application en mode développement.
+- Accédez à [http://localhost:3000](http://localhost:3000) dans le navigateur.
+- La page se rechargera automatiquement lors des modifications du code.
+- Les erreurs de linting seront affichées dans la console.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+### Lancer les tests
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+yarn test
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Lance le runner de tests en mode interactif.
+- Consultez la section [running tests](https://facebook.github.io/create-react-app/docs/running-tests) pour plus d'informations.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+### Construire l’application
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```bash
+yarn run build
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Construit l'application pour la production dans le dossier `build`.
+- Optimise les performances en minifiant le code et incluant des hashes dans les noms de fichiers.
+- L’application est prête à être déployée.
+- Consultez la section [deployment](https://facebook.github.io/create-react-app/docs/deployment) pour plus d'informations.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+---
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Technologies et outils
 
-## Learn More
+### Axios
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Une instance Axios est pré-configurée dans le fichier `app/axios/axiosInstance.tsx`.
+- Utilisez cette instance pour faire des requêtes vers le backend.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-## Axios
+### Tailwind CSS
 
-An axios instance is already created in the **app/axios/axiosIntance.tsx**, please use it to make requests to the backend.
+#### Utilisation
 
-## Tailwindcss
+- Ajoutez les classes Tailwind CSS à l’attribut `className` des éléments HTML que vous souhaitez styler.
+- Consultez la documentation pour démarrer : [Tailwind UI](https://tailwindui.com/components).
 
-### Usage
+#### Styles personnalisés
 
-Add your Tailwind CSS classes to the `className` attribute of the HTML element you want to style.
-See the docs to get started with Tailwind CSS: https://tailwindui.com/components
+- Les styles personnalisés peuvent être ajoutés dans la section `theme` du fichier `tailwind.config.js`.
+- Documentation : [Ajouter des styles personnalisés](https://tailwindcss.com/docs/adding-custom-styles).
 
-### Custom Styles
+---
 
-Custom styles can be added to the `tailwind.config.js` file in the theme section.
-See the docs: https://tailwindcss.com/docs/adding-custom-styles
+### React Router (v6.4)
 
-## React Router (v6.4)
+- Documentation : [React Router](https://reactrouter.com/en/main/start/overview).
 
-### Usage
+---
 
-https://reactrouter.com/en/main/start/overview
+### RxJS
 
-## RxJS
+#### Service d’authentification
 
-### Usage
+- Le service d’authentification empêche l’accès aux routes protégées si l’utilisateur n’est pas connecté.
+- Plus d’informations : [React RxJS](https://react-rxjs.org/docs/getting-started).
 
-#### Alert Service
+---
 
-Used here to prevent the need to pass props down to child components to display alerts.
-The alert service is used to display alerts in the application.
-You can call the exported func addAlert(alert: Alert) wherever you want to show an alert. The alert will be displayed at the top of the page in <Root />.
-More info can be found here : https://react-rxjs.org/docs/getting-started
+## Références
+
+- Documentation Create React App : [Getting Started](https://facebook.github.io/create-react-app/docs/getting-started).
+- Documentation React : [React Documentation](https://reactjs.org/).
+- Axios : [Documentation Axios](https://axios-http.com/).
+- Tailwind CSS : [Documentation Tailwind](https://tailwindcss.com/docs/installation).
+- React Router : [Documentation officielle](https://reactrouter.com/en/main/start/overview).
+- RxJS : [Documentation RxJS](https://rxjs.dev/).
+

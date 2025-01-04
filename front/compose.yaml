@@ -5,8 +5,3 @@ services:
     ports:
       - "3000:3000"
 
-    networks:
-      - nginx-shared-network
-networks:
-    nginx-shared-network:
-        external: true

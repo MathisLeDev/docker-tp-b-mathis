@@ -1,11 +1,26 @@
+# Étape 1 : Builder l'application
+FROM node:23-alpine3.20 AS builder
+
+WORKDIR /app
+
+COPY . .
+
+RUN yarn install --frozen-lockfile && \
+    yarn build && \
+    rm -rf node_modules
+
+# Étape 2 : Conteneur final pour servir l'application
 FROM node:23-alpine3.20
 
 WORKDIR /app
 
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
+# Copier uniquement les fichiers nécessaires pour le runtime
+COPY --from=builder /app/build ./build
+RUN yarn global add serve
 
-COPY . .
+# Ajouter le chemin de serve au PATH
+ENV PATH="/root/.yarn/bin:/root/.config/yarn/global/node_modules/.bin:$PATH"
 
 EXPOSE 3000
-CMD ["yarn", "start"]
+
+CMD ["serve", "-s", "build", "-l", "3000", "--no-clipboard"]

@@ -1,0 +1,54 @@
+version: "3.9"  # Assurez-vous que votre version de compose prend en charge la fonctionnalité `watch`
+
+services:
+  server:
+    build: ./back/
+    env_file:
+      - .env.prod
+    ports:
+      - "3001:3001"
+    depends_on:
+      - database
+    networks:
+      - database-network
+    develop:
+      watch:
+        # Action sync pour synchroniser les fichiers modifiés du backend avec le conteneur
+        - action: sync
+          path: ./back/src  # Le chemin local de vos fichiers source
+          target: /app/src   # Le chemin de destination dans le conteneur
+          ignore:
+            - node_modules/  # Ignorer les fichiers node_modules pour éviter des problèmes de performance
+        # Action sync+restart pour redémarrer le service à chaque modification de certains fichiers de config
+        - action: sync+restart
+          path: ./back/config
+          target: /app/config
+
+  database:
+    image: "postgres:17.1-alpine"
+    volumes:
+      - database-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_HOST: ${DB_HOST}
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    networks:
+      - database-network
+
+  admin:
+      image: dpage/pgadmin4:latest
+      environment:
+        PGADMIN_DEFAULT_EMAIL: "admin@admin.com"
+        PGADMIN_DEFAULT_PASSWORD: "admin"
+      ports:
+        - "8080:80"
+      networks:
+        - database-network
+
+volumes:
+  database-data:
+
+networks:
+  database-network:
+    driver: bridge

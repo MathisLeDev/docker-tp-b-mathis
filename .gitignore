@@ -9,6 +9,9 @@ back/package-lock.json
 back/*.js
 
 .idea
+.env
+.env.prod
+.env.dev
 
 front/node_modules
 front/.idea

@@ -1,6 +1,8 @@
 import { Quote } from "../entity/Quote";
 import dotenv from "dotenv";
 import {User} from "../entity/User";
+import {sendEmail} from "../utils/NodeMailerUtils/NodeMailerUtils";
+import {MailType} from "../types/MailType";
 
 dotenv.config();
 
@@ -50,7 +52,13 @@ export class QuoteController {
           const newQuote = Quote.create({quote, user});
           if (await newQuote.save()) {
               const { password, ...userWithoutPassword } = user;
-              console.log(userWithoutPassword);
+              const mail: MailType = {
+                    to: user.email,
+                    subject: "New Quote",
+                    text: `Your quote has been added: ${quote}`,
+                    html: `<p>Your quote has been added: ${quote}</p>`,
+              }
+              await sendEmail(mail);
               return res.json({
                   message: "Quote added",
                   quote: newQuote,

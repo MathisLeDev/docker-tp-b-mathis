@@ -36,7 +36,7 @@ jobs:
           context: ./server
           file: ./server/Dockerfile.prod
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY_NAME }}:feature-ci-cd
           labels: ${{ steps.meta.outputs.labels }}
 
       - name: Generate artifact attestation

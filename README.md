@@ -21,7 +21,7 @@
 
 **Variables d'environnement**
 - Duppliquer le fichier **.env.example** en **.env** et **.env.prod.example** en **.env.prod**.
-- Pour la génération du TOKEN, copier coller [ce string](https://generate.plus/en/base64)
+- Pour la génération du TOKEN, copier-coller [ce string](https://generate.plus/en/base64)
 ```bash
 cp .env.example .env; cp .env.example.prod .env.prod; cp server/.env.example server/.env; cp server/.env.prod.example server/.env.prod; cp client/.env.example client/.env; cp client/.env.prod.example client/.env.prod
  ```
@@ -69,7 +69,7 @@ Ce projet utilise 5 services :
 ### Configuration du réseau et publication des ports
 - **client** : 3000:3000
 - **server** : 8080:8080
-- **database** : 5432:5432 uniquement accessible par le server via un réseau interne configuré en **bridge**.
+- **database** : 5432:5432 uniquement accessible par le service server via un réseau interne configuré en **bridge**.
 
     
 ### Préparation des environnements
@@ -125,17 +125,18 @@ docker compose -f ./compose.yaml -f ./compose.prod.yaml up
 - Mise en place d'une pipeline CI/CD avec Github Actions.
 - Le fichier de configuration se trouve dans le dossier **.github/workflows**.
 - La pipeline construit l'image du service **server** et la publie [ici](https://hub.docker.com/r/mathisledev/docker-tp-b-mathis/tags).
-- Les éxécutions des pipelines sont [ici](https://github.com/MathisLeDev/docker-tp-b-mathis/actions/)
+- Les exécutions des pipelines sont [ici](https://github.com/MathisLeDev/docker-tp-b-mathis/actions/)
 
 ## Remarques commentaires et difficultés rencontrées
-- Beaucoup d'attention a été apporté sur la rédaction de ce README pour qu'il permette au mieux de valider les fonctionnalitées attendues du TP.
+- Beaucoup d'attention a été apporté sur la rédaction de ce README pour qu'il permette au mieux de valider les fonctionnalités attendues du TP.
 - La durée approximative de 2h30 a été dépassée avec un total de 16h.
+- Ce README a été corrigé par [reverso](https://www.reverso.net/orthographe/correcteur-francais/)
 - La partie des watchs a été plus difficile que prévu.
-- Le service mailcatcher viens du repo de tyndyll que vous pouvez retrouver [ici](https://github.com/mailhog/MailHog)
+- Le service mailcatcher vient du repo de tyndyll que vous pouvez retrouver [ici](https://github.com/mailhog/MailHog)
 - Dans la partie préparations des deux environnements :
 Concernant le 4ème point. Le sens de cette phrase peut à la fois indiquer qu'on ne souhaite pas d'information de debug affichée NI de gestionnaire d'exceptions/erreur avec redirection vers les logs.
-OU bien que l'on souhaite gardé le gestionnaire d'exceptions/erreurs avec redirection vers les logs.
+OU bien que l'on souhaite garder le gestionnaire d'exceptions/erreurs avec redirection vers les logs.
 La décision a été de ne rien afficher sur la sortie en production.
-- La derniere partie sur la CI/CD push seulement l'image du serveur. Le serveur ne contenant pas le service database. IL ne pourra pas fonctionner tout seul.
+- La dernière partie sur la CI/CD push seulement l'image du serveur. Le serveur ne contenant pas le service database. IL ne pourra pas fonctionner tout seul.
 - L'image client en environnement de développement est très lourde car elle contient encore le node_modules. Il est nécessaire pour le hot reload.
 

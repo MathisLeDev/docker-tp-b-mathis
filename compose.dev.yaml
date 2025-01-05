@@ -14,6 +14,7 @@ services:
     networks:
       - database-network
       - mailcatcher-network
+      - server-network
     develop:
       watch:
         - action: sync
@@ -37,6 +38,8 @@ services:
           target: /app/src
           ignore:
             - node_modules/
+    networks:
+      - server-network
 
 
 
@@ -77,5 +80,7 @@ networks:
   database-network:
     driver: bridge
   mailcatcher-network:
+    driver: bridge
+  server-network:
     driver: bridge
 

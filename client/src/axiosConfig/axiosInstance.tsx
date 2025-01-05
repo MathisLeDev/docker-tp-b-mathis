@@ -9,13 +9,6 @@ export const axiosInstance = axios.create({
     : 10000,
 });
 
-export const axiosMediaInstance = axios.create({
-  baseURL: process.env.REACT_APP_AXIOS_BASE_URL_MEDIA,
-  timeout: process.env.REACT_APP_AXIOS_TIMEOUT
-    ? parseInt(process.env.REACT_APP_AXIOS_TIMEOUT)
-    : 10000,
-});
-
 axiosInstance.interceptors.request.use(
   (config) => {
     // Do something before request is sent

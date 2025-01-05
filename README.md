@@ -21,8 +21,12 @@
 
 **Variables d'environnement**
 - Duppliquer le fichier **.env.example** en **.env** et **.env.prod.example** en **.env.prod**.
-- Modifier les variables d'environnement dans ces fichiers. Il n'est pas conseiller de garder les valeurs par défaut.
 - Pour la génération du TOKEN, copier coller [ce string](https://generate.plus/en/base64)
+```bash
+cp .env.example .env; cp .env.example.prod .env.prod; cp server/.env.example server/.env; cp server/.env.prod.example server/.env.prod; cp client/.env.example client/.env; cp client/.env.prod.example client/.env.prod
+ ```
+- Il est **fortement recommandé** de modifier les valeurs par défaut des .env.
+
 
 **Production**
 ```bash

@@ -27,7 +27,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
-          images: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY_NAME }}
+          images: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKERHUB_REPOSITORY_NAME }}
 
       - name: Build and push Docker image
         id: push
@@ -36,7 +36,7 @@ jobs:
           context: ./server
           file: ./server/Dockerfile.prod
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPOSITORY_NAME }}feature-ci-cd
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPOSITORY_NAME }}feature-ci-cd
           labels: ${{ steps.meta.outputs.labels }}
 
       - name: Generate artifact attestation

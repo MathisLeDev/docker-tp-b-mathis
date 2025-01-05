@@ -2,4 +2,3 @@ node_modules
 .env
 .env.example
 .git
-.env.prod

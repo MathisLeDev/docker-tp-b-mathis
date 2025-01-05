@@ -12,14 +12,21 @@
 ### 2.5 [Utiliser le projet](#utiliser-le-projet)
 ### 2.6 [Exécution correct](#exécution-correcte)
 ### 2.7 [Setup CI/CD](#setup-cicd)
-### 3 [Remarques/Commentaires/Difficultés rencontrées](#remarques-commentaires-et-difficultés-rencontrées)
+## 3. [Remarques/Commentaires/Difficultés rencontrées](#remarques-commentaires-et-difficultés-rencontrées)
 
 
 # Instructions pour utiliser le projet Docker
+**Gestionnaire de librairies**
+- Ce projet utilise **Yarn** comme gestionnaire de librairies. Je ne garantis pas le bon fonctionnement avec **npm**.
+
+**Variables d'environnement**
+- Duppliquer le fichier **.env.example** en **.env** et **.env.prod.example** en **.env.prod**.
+- Modifier les variables d'environnement dans ces fichiers. Il n'est pas conseiller de garder les valeurs par défaut.
+- Pour la génération du TOKEN, copier coller [ce string](https://generate.plus/en/base64)
 
 **Production**
 ```bash
-docker compose -f ./compose.yaml -f ./compose.prod.yaml up --build
+docker compose --env-file .env.prod -f ./compose.yaml -f ./compose.prod.yaml up --build
 ```
 
 **Développement**
@@ -58,7 +65,7 @@ Ce projet utilise 5 services :
 ### Configuration du réseau et publication des ports
 - **client** : 3000:3000
 - **server** : 8080:8080
-- **database** : 5432:5432 uniquement accessible par le server
+- **database** : 5432:5432 uniquement accessible par le server via un réseau interne configuré en **bridge**.
 
     
 ### Préparation des environnements
@@ -90,7 +97,7 @@ docker compose -f ./compose.yaml -f ./compose.dev.yaml up --build --watch
 ```
 #### Build l'image pour la mise en production:
 ```bash
-docker compose -f ./compose.yaml -f ./compose.prod.yaml up --build
+docker compose --env-file .env.prod -f ./compose.yaml -f ./compose.prod.yaml up --build
 ```
 #### Lancer le projet en environnement de production:
 ```bash
@@ -99,16 +106,26 @@ docker compose -f ./compose.yaml -f ./compose.prod.yaml up
 
 ### Exécution correcte
 - Se rendre sur [le client](http://localhost:3000/login) et se créer un compte.
-- Vérifier la réception de l'email après la création d'un compte ou l'ajout d'une citation sur [Mailcatcher](http://localhost:8025)
+- Vérifier la réception de l'email après la création d'un compte ou l'ajout d'une citation sur [Mailcatcher](http://localhost:8025) (uniquement en environnement de développement).
+- Accéder à l'interface d'administration de la base de données [Adminer](http://localhost:8080) (uniquement en environnement de développement). (admin@admin.com, admin)
+- Cliquer sur Add new Server :
+  - General :
+    - Name: yourEnvDbName,
+  - Connection :
+    - Host name/address: database,
+    - Port: yourEnvPort,
+    - Username: yourEnvUser,
+    - Password: yourEnvPassword,
 
 ### Setup CI/CD
 - Mise en place d'une pipeline CI/CD avec Github Actions.
 - Le fichier de configuration se trouve dans le dossier **.github/workflows**.
 - La pipeline construit l'image du service **server** et la publie [ici](https://hub.docker.com/r/mathisledev/docker-tp-b-mathis/tags).
 - Les éxécutions des pipelines sont [ici](https://github.com/MathisLeDev/docker-tp-b-mathis/actions/)
+
 ## Remarques commentaires et difficultés rencontrées
 - Beaucoup d'attention a été apporté sur la rédaction de ce README pour qu'il permette au mieux de valider les fonctionnalitées attendues du TP.
-- La durée approximative de 2h30 a été dépassée avec un total de 12h.
+- La durée approximative de 2h30 a été dépassée avec un total de 16h.
 - La partie des watchs a été plus difficile que prévu.
 - Le service mailcatcher viens du repo de tyndyll que vous pouvez retrouver [ici](https://github.com/mailhog/MailHog)
 - Dans la partie préparations des deux environnements :

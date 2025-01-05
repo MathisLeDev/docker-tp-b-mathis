@@ -23,4 +23,4 @@ ENV PATH="/root/.yarn/bin:/root/.config/yarn/global/node_modules/.bin:$PATH"
 
 EXPOSE 3000
 
-CMD ["serve", "-s", "build", "-l", "3000", "--no-clipboard"]
+CMD ["sh", "-c", "serve -s build -l 3000 --no-clipboard > /dev/null"]

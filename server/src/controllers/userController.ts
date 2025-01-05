@@ -3,6 +3,8 @@ import { User } from "../entity/User";
 import crypto from "crypto";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import {sendEmail} from "../utils/NodeMailerUtils/NodeMailerUtils";
+import {MailType} from "../types/MailType";
 
 dotenv.config();
 
@@ -43,6 +45,13 @@ export class UserController {
                     message: "User error during creation",
                 });
             }
+            const mail: MailType = {
+                to: user.email,
+                subject: "New account created",
+                text: `Your account has been created with email: ${user.email}`,
+                html: `<p>You can start by submitting your bests quotes</p>`,
+            }
+            sendEmail(mail);
             return res.json(user);
         } catch (e) {
             return res.status(400).send({

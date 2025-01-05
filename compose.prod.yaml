@@ -1,14 +1,29 @@
 services:
   server:
-    build: back/.
+    build:
+      context: server/
+      dockerfile: Dockerfile.prod
     env_file:
       - .env.prod
     ports:
       - "3001:3001"
+    environment:
+      NODE_ENV: "production" # Mode production pour désactiver les logs de debug
+
     depends_on:
       - database
     networks:
       - database-network
+
+  client:
+    build:
+      context: client/
+      dockerfile: Dockerfile.prod
+    ports:
+      - "3000:3000"
+    depends_on:
+      - server
+
 
   database:
     image: "postgres:17.1-alpine"

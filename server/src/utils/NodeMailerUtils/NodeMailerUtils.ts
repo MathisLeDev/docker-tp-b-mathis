@@ -2,7 +2,7 @@ import nodemailer from "nodemailer";
 import {MailType} from "../../types/MailType";
 
 const transporter = nodemailer.createTransport({
-    host: 'localhost',
+    host: 'mailcatcher',
     port: 1025,
 });
 

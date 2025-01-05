@@ -41,12 +41,12 @@ services:
 
 
   mailcatcher:
-    build: ./MailHog/
+    image: mailhog/mailhog
     ports:
       - "8025:8025"
       - "1025:1025"
     networks:
-        - mailcatcher-network
+      - mailcatcher-network
 
   database:
     image: "postgres:17.1-alpine"

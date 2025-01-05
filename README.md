@@ -137,4 +137,5 @@ Concernant le 4ème point. Le sens de cette phrase peut à la fois indiquer qu'o
 OU bien que l'on souhaite gardé le gestionnaire d'exceptions/erreurs avec redirection vers les logs.
 La décision a été de ne rien afficher sur la sortie en production.
 - La derniere partie sur la CI/CD push seulement l'image du serveur. Le serveur ne contenant pas le service database. IL ne pourra pas fonctionner tout seul.
+- L'image client en environnement de développement est très lourde car elle contient encore le node_modules. Il est nécessaire pour le hot reload.
 

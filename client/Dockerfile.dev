@@ -4,7 +4,7 @@ FROM node:23-alpine3.20 AS dev
 WORKDIR /app
 
 # Copier les fichiers package.json et yarn.lock en premier pour optimiser le cache
-COPY package.json yarn.lock ./
+COPY package.json ./
 
 # Installer les dépendances sans suppression des node_modules
 RUN yarn install

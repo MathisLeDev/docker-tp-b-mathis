@@ -1,6 +1,6 @@
 node_modules
 .env
 .env.example
-src/public/images/*
 .git
 .env.prod
+.package.json

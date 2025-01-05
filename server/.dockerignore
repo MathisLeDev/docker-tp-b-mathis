@@ -3,4 +3,3 @@ node_modules
 .env.example
 .git
 .env.prod
-.package.json

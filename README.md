@@ -15,10 +15,6 @@
 ### 3 [Remarques/Commentaires/Difficultés rencontrées](#remarques-commentaires-et-difficultés-rencontrées)
 
 
-
-
-
-
 # Instructions pour utiliser le projet Docker
 
 **Production**
@@ -106,8 +102,10 @@ docker compose -f ./compose.yaml -f ./compose.prod.yaml up
 - Vérifier la réception de l'email après la création d'un compte ou l'ajout d'une citation sur [Mailcatcher](http://localhost:8025)
 
 ### Setup CI/CD
-
-
+- Mise en place d'une pipeline CI/CD avec Github Actions.
+- Le fichier de configuration se trouve dans le dossier **.github/workflows**.
+- La pipeline construit l'image du service **server** et la publie [ici](https://hub.docker.com/r/mathisledev/docker-tp-b-mathis/tags).
+- Les éxécutions des pipelines sont [ici](https://github.com/MathisLeDev/docker-tp-b-mathis/actions/)
 ## Remarques commentaires et difficultés rencontrées
 - Beaucoup d'attention a été apporté sur la rédaction de ce README pour qu'il permette au mieux de valider les fonctionnalitées attendues du TP.
 - La durée approximative de 2h30 a été dépassée avec un total de 12h.
@@ -117,5 +115,5 @@ docker compose -f ./compose.yaml -f ./compose.prod.yaml up
 Concernant le 4ème point. Le sens de cette phrase peut à la fois indiquer qu'on ne souhaite pas d'information de debug affichée NI de gestionnaire d'exceptions/erreur avec redirection vers les logs.
 OU bien que l'on souhaite gardé le gestionnaire d'exceptions/erreurs avec redirection vers les logs.
 La décision a été de ne rien afficher sur la sortie en production.
-
+- La derniere partie sur la CI/CD push seulement l'image du serveur. Le serveur ne contenant pas le service database. IL ne pourra pas fonctionner tout seul.
 

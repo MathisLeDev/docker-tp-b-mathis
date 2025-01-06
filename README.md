@@ -50,7 +50,7 @@ Ce projet utilise 5 services :
 - **server** :
   - description: Serveur en Node.js qui expose une API REST avec comme framework Express.js.
   - image: node:23-alpine3.20
-  - ports: 8080:8080
+  - ports: 3001:3001
 - **database** :
   - description: Base de données PostgreSQL.
   - image: postgres:17.1-alpine
@@ -58,7 +58,7 @@ Ce projet utilise 5 services :
 - **admin** :
   - description: Interface d'administration de la base de données.
   - image: adminer:4.8.1
-  - ports: 8081:8080
+  - ports: 8080:8080
 - **mailcatcher** :
   - description: Service SMTP pour intercepter les emails.
   - image: golang:1.18-alpine
@@ -68,8 +68,12 @@ Ce projet utilise 5 services :
 
 ### Configuration du réseau et publication des ports
 - **client** : 3000:3000
-- **server** : 8080:8080
+- **server** : 3001:3001
 - **database** : 5432:5432 uniquement accessible par le service server via un réseau interne configuré en **bridge**.
+- **admin** : 8080:80
+- **mailcatcher** : 
+  - 8025:8025
+  - 1025:1025
 
     
 ### Préparation des environnements
@@ -78,7 +82,7 @@ Ce projet utilise 5 services :
 ##### Développement
 - Le service **server** assure une modification des sources sans avoir à reconstruire l'image avec l'argument **--watch**.
 - Les variables d'environnement sont chargées depuis le fichier **.env.dev**. Avec des crédentials de bdd dédiés.
-- Le service **admin** et **mailcatcher** sont actifs et respectivement disponibles sur le port **8081** et **8025**.
+- Le service **admin** et **mailcatcher** sont actifs et respectivement disponibles sur le port **8080** et **8025**.
 
 ##### Production
 - Les conteneurs sont instanciés à partir de leurs images respectives et taguées correctement.
